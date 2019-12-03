@@ -12,7 +12,7 @@ export default class Homepage extends React.Component {
       <Container
       style={styles.mainContainer}
       >
-       <Header />
+      <Header />
       <Content >
         <Button
           onPress={()=>{

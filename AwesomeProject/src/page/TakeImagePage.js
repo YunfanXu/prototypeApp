@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Text } from 'native-base';
+import { RNCamera, FaceDetector } from 'react-native-camera';
 
 export default class TakeImagePage extends React.Component {
   static navigationOptions = {
