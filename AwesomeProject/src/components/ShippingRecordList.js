@@ -15,29 +15,31 @@ export default class ShippingRecordList extends Component {
   getItem(item) {
     return (
       <Button
+        transparent
+        light
         style={{height: 200, padding: 10}}
         onPress={() => {
           this.props.navigation.push('RecordsPage', {recordData: item.detail});
         }}>
-        <Row>
+        <Row style={{height: 180, width: '100%'}}>
           <Col
-            style={{
-              backgroundColor: this.ISGET ? '#F0FFFF' : '#00CE9F',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 15,
-              flexGrow: 1,
-            }}>
+            size={1}
+            style={[
+              styles.shippingRecordButton,
+              {
+                backgroundColor: this.ISGET ? '#F0FFFF' : '#00CE9F',
+              },
+            ]}>
             <Text>{item.title}</Text>
           </Col>
           <Col
-            style={{
-              backgroundColor: this.ISGET ? '#E6E6FA' : '#635DB7',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 15,
-              flexGrow: 3,
-            }}>
+            size={2}
+            style={[
+              styles.shippingRecordButton,
+              {
+                backgroundColor: this.ISGET ? '#E6E6FA' : '#635DB7',
+              },
+            ]}>
             <Text>{item.status}</Text>
           </Col>
         </Row>
