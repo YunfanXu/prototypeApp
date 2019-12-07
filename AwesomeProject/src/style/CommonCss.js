@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import ProductPage from '../page/ProductPage';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -15,6 +16,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  centerDisplay:{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
   },
   capture: {
     flex: 1,
@@ -57,6 +63,39 @@ const styles = StyleSheet.create({
   },
   Homepage_button_active:{
     backgroundColor: 'black'
+  },
+  EvaluatePage_productContainer:{
+    width: '100%',
+    height: '30%',
+    paddingTop: 10,
+    paddingBottom:10,
+    paddingLeft:'5%'
+    // backgroundColor:'red'
+  },
+  EvaluatePage_recommendationContainer:{
+    width: '100%',
+    height: '10%',
+    paddingTop: 10,
+    paddingBottom:10,
+    paddingLeft:'5%'
+  },
+  EvaluatePage_productImage:{
+    height:'100%',
+    width: 'auto'
+  },
+  ProductPage_bottomContainer:{
+    display:'flex',
+    justifyContent:'space-around',
+    alignItems: "center",
+    width: '100%',
+    height: '50%',
+    paddingTop: 10,
+    paddingBottom:10,
+    paddingLeft:'5%'
+  },
+  ProductPage_Button:{
+    width:'40%',
+    height:'10%'
   }
 });
 

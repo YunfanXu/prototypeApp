@@ -18,10 +18,17 @@
     "react-native-image-picker": "^1.1.0",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^1.0.0-alpha.23",
+    "react-native-starrating": "^1.0.1",
     "react-native-vector-icons": "^6.6.0",
     "react-native-webview": "^7.5.2",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3"
+  },
+  "prettier": {
+    "requirePragma": true,
+    "singleQuote": true,
+    "printWidth": 115,
+    "proseWrap": "always"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

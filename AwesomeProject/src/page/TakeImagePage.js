@@ -9,7 +9,7 @@ import {
 import {RNCamera} from 'react-native-camera';
 import styles from '../style/CommonCss';
 import ImagePicker from 'react-native-image-picker';
-import {Icon} from 'native-base';
+import Product from '../api/ProductAPI';
 
 export default class TakeImagePage extends React.Component {
   static navigationOptions = {
@@ -30,7 +30,6 @@ export default class TakeImagePage extends React.Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
           onGoogleVisionBarcodesDetected={({barcodes}) => {
             console.log(barcodes);
           }}
@@ -39,17 +38,24 @@ export default class TakeImagePage extends React.Component {
           <TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style={styles.capture}>
-            <Text style={{fontSize: 14}}>拍照</Text>
+            <Text style={{fontSize: 14}}>Snap</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.choosePictureFromLocal()}
             style={styles.capture}>
-            <Text style={{fontSize: 14}}> 选取本地图片 </Text>
+            <Text style={{fontSize: 14}}> Local Image </Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
+
+  uploadImage = (uri) =>{
+    Product.uploadImage(uri).then((data) =>{
+      this.props.navigation.push('EvaluatePage',{data});
+    })
+  }
+
   choosePictureFromLocal = () => {
     const options = {
       title: 'Select Avatar',
@@ -63,10 +69,12 @@ export default class TakeImagePage extends React.Component {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else {
-        console.log('Response = ', response.uri);
         this.setState({
           imageUrl: response.uri,
         });
+        console.log('response.uri:',response.uri);
+        
+        this.uploadImage(response.uri);
       }
     });
   };
