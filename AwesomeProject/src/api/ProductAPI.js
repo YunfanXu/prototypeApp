@@ -1,4 +1,5 @@
-const pre_URL = "http://10.72.64.109:8085/api/v1/";
+const pre_URL = "https://config.epm-wb2c.projects.epam.com/api/v1/";
+// const pre_URL = "http://10.72.64.109:8085/api/v1/";
 
 class Product {
   static uploadImage(imgUri) {

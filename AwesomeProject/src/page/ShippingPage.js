@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Header, Content, Text, Tab, Tabs} from 'native-base';
 import ShippingRecordList from '../components/ShippingRecordList';
-import DATA from '../assets/data/packageData';
 
 export default class TrackLogisticalHistory extends React.Component {
   constructor(props) {

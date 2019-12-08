@@ -4,7 +4,6 @@ import {SafeAreaView, View, Image, FlatList, StyleSheet, TouchableOpacity} from 
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Icon, Left, Body } from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 
-const DATA =[[1,2],[3,4],[5,6],[7]]
 export default class EvaluatePage extends React.Component {
   constructor(props) {
     super(props);
@@ -14,40 +13,23 @@ export default class EvaluatePage extends React.Component {
     
   }
   getProductCard = (item) => {
-    let uri = `http://10.72.64.109:8085${item.picAddress}`
+    let uri = `https://config.epm-wb2c.projects.epam.com/api/v1${item.picAddress}`
+    // let uri = `http://10.72.64.109:8085${item.picAddress}`
+
     return (
       <TouchableOpacity
         onPress={() =>{
-          this.props.navigation.push('ProductPage', {item, productId:this.props.navigation.state.params.data.id,imageUrl: uri})
+          this.props.navigation.push('ProductPage', {item, productId:this.props.navigation.state.params.data.id,productPicAddress:this.props.navigation.state.params.data.picAddress, imageUrl: uri})
         }}>
-        <Card style={{flex: 0}}>
-          <CardItem>
-            <Left>
-              <Body>
-                <Text>{item.name}</Text>
-                {/* <Text note>April 15, 2016</Text> */}
-              </Body>
-            </Left>
-          </CardItem>
-          <CardItem>
-            <Left>
-                {/* <Icon name="logo-github" /> */}
-            <Text>Price: {item.price}</Text>
-            </Left>
-          </CardItem>
+        <Card style={{flex: 0, paddingBottom: 5}}>
           <CardItem>
             <Body>
               <Image resizeMode={'contain'} source={{uri}} style={{width: '100%', height:200,flex: 1}}/>
+              <Text style={styles.EvaluatePage_text_price}>Evaluated price: {item.price}</Text>
               <Text>
                 {item.description}
               </Text>
             </Body>
-          </CardItem>
-          <CardItem>
-            <Left>
-                {/* <Icon name="logo-github" /> */}
-                <Text>Choose it</Text>
-            </Left>
           </CardItem>
         </Card>
       </TouchableOpacity>

@@ -1,15 +1,12 @@
-const pre_URL = "http://10.72.64.109:8085/api/v1/";
+const pre_URL = "https://config.epm-wb2c.projects.epam.com/api/v1/";
+// const pre_URL = "http://10.72.64.109:8085/api/v1/";
 
 class ReviewAPI {
-  static getImage(imgUri) {
+  static getImage() {
     const url = pre_URL+'retrieve';
     return fetch(url, {
-      method: 'GET',
-      headers:  {  
-        'Content-Type': 'application/json; charset = utf-8'
-      },
-        body: {}
-      })
+      method: 'GET'
+    })
       .then((response) => response.text())
       .then((responseData) => {
         return JSON.parse(responseData)

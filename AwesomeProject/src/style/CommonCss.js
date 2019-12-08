@@ -72,6 +72,12 @@ const styles = StyleSheet.create({
     paddingLeft:'5%'
     // backgroundColor:'red'
   },
+  EvaluatePage_text_price:{
+   fontSize: 18,
+   lineHeight: 30,
+   color: 'red'
+    // backgroundColor:'red'
+  },
   EvaluatePage_recommendationContainer:{
     width: '100%',
     height: '10%',
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     alignItems: "center",
     width: '100%',
-    height: '50%',
+    height: '70%',
     paddingTop: 10,
     paddingBottom:10,
     paddingLeft:'5%'
@@ -96,6 +102,19 @@ const styles = StyleSheet.create({
   ProductPage_Button:{
     width:'40%',
     height:'10%'
+  },
+  Modal_Container:{
+    width: '100%',
+    height: '100%',
+    backgroundColor:'rgba(255,255,255,0)'
+  },
+  ReviewPage_starRating: {
+    width: 200,
+    height: 40
+  },
+  ReviewPage_starRating_text:{
+    fontSize:22,
+    lineHeight: 30
   }
 });
 

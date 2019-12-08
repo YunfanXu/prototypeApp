@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
 import styles from '../style/CommonCss';
-import {SafeAreaView, View, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {SafeAreaView, View, Image, TextInput, StyleSheet, Modal} from 'react-native';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import { Container, Header, Content, Form, Item, Input, Label,DatePicker,Text, Button } from 'native-base';
 import ProductApi from '../api/ProductAPI';
 
-const DATA =[[1,2],[3,4],[5,6],[7]]
 export default class ProductPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       chosenDate: new Date(),
       conditionLevel: 0,
+      modalVisible: false,
     };
     this.productData = this.props.navigation.state.params.item;
     this.setDate = this.setDate.bind(this);
     this.setConditionLevel = this.setConditionLevel.bind(this);
     console.log('this.props.navigation.state.params.imageUrl',this.props.navigation.state.params.imageUrl);
-    
+    this.imgUrl = this.props.navigation.state.params.imageUrl;
+    console.log('this.imgUrl',this.imgUrl);
   }
 
   setDate(newDate) {
@@ -54,7 +55,7 @@ export default class ProductPage extends React.Component {
               animationType={"fade"}
               androidMode={"default"}
               placeHolderText="When you bought the product?"
-              textStyle={{fontSize: 18, color: "green" }}
+              textStyle={{fontSize: 18,lineHeight: 30, color: "black" }}
               placeHolderTextStyle={{ fontSize: 18, color: "#d3d3d3" }}
               onDateChange={this.setDate}
               disabled={false}
@@ -63,28 +64,64 @@ export default class ProductPage extends React.Component {
     )
   }
 
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   getEvaluatedData = () =>{
     let data = this.productData;
     data.boughtDate = this.state.chosenDate;
     data.itemCondition= this.state.conditionLevel;
+    data.picAddress = this.props.navigation.state.params.productPicAddress;
     data.id = this.props.navigation.state.params.productId;
     return data;
   }
+
   confirmEvaluating = () =>{
     let productInfo = this.getEvaluatedData();
     ProductApi.imageEvaluate(productInfo).then((response) =>{
-      console.log('imageEvaluate:',response);
+      if(response){    
+        this.setModalVisible(true);    
+      }
     });
+  }
+
+  displayMessage () {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+        <View style={[styles.centerDisplay,styles.Modal_Container]}>
+          <View>
+            <Text style={{fontSize:25, padding: 20}}>Thanks for your donation!</Text>
+            <Button
+              style={styles.centerDisplay}
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+                this.props.navigation.popToTop()
+              }}>
+              <Text>Confirm</Text>
+            </Button>
+          </View>
+        </View>
+      </Modal>
+    </View>
+    )
   }
 
   render() {
     return (
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.EvaluatePage_productContainer}>
-          <Image
+        <Image
             style={styles.EvaluatePage_productImage}
             resizeMode={'contain'}
-            source={{uri: this.props.navigation.state.params.imageUrl}}/>
+            source={{uri: this.imgUrl}}/>
         </View>
         <View style={[styles.ProductPage_bottomContainer]}>
           <View style={[styles.centerDisplay,]}>
@@ -102,6 +139,7 @@ export default class ProductPage extends React.Component {
             style={[styles.ProductPage_Button,styles.centerDisplay]}>
             <Text>Confirm</Text>
           </Button>
+          {this.displayMessage()}
         </View>
       </SafeAreaView>
     )
